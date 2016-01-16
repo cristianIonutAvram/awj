@@ -6,11 +6,575 @@
   <link rel="stylesheet" media="all" href="css/custom.css">
 </head>
 <body>
+ 
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="">AngularJS and Spring</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="#persoana">Persoane</a></li>
+            <li><a href="#student">Studenti</a></li>
+            <li><a href="#materie">Materii</a></li>
+			<li><a href="#facultate">Facultati</a></li>
+            <li><a href="#profesor">Profesori</a></li>        
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+
+  <hr/>
 
   <div class="container">
     <div ng-controller="HomeController">
-      <h1>{{ helloWorld }}</h1>
+      <h1 ng-click="doStuff()">{{ helloWorld }}</h1>
     </div>
+  </div>
+
+  <hr/>
+
+  <!-- /Persoana -->
+  <div class="container style" id="persoana" ng-controller="PersoanaController">
+    <h1>Persoana</h1>
+    <h2>Tabel persoane</h2>
+    <table class="table table-bordered">
+      <tr>
+        <th ng-repeat="key in keys">{{ key }}</th>
+        <th style="width:210px;">Options</th>
+      </tr>
+      <tr ng-repeat="objct in obiecte" data-id="{{objct.id}}">
+        <td>{{ objct.id }}</td>
+  <td>{{objct.name}}</td>
+        <td>
+          <a href="">
+            <span ng-click = "displayModal(objct.id)" class="label label-success" >
+              Open
+              <span class="glyphicon glyphicon-folder-open"></span>
+            </span>
+          </a>
+         <button ng-click="setUpdateObiect(objct)" class="btn btn-info btn-xs">
+              Edit
+              <span class="glyphicon glyphicon-edit"></span>
+          </a>
+  <button ng-click="deleteObiect(objct.id)" class="btn btn-danger btn-xs">
+              Remove
+              <span class="glyphicon glyphicon-remove"></span>
+  </button>
+          </a>
+        </td>
+      </tr>
+    </table>
+ 
+  <modal title="Display person" visible="showModal">
+  <form role="form">
+      <div class="form-group">
+   <label for="id">ID</label>
+        <input class="form-control" id ="id"  type="form-control" ng-model="showObiect.id">
+      </div>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input class="form-control" id = "name" type="form-control" ng-model="showObiect.name">
+      </div>
+     </form>
+  </modal>
+  
+  <div class="row">
+      <div class="col-md-3">
+ <h2>Adaugare persoana</h2>
+    <table>
+    <tr>
+  <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="obiect.id"/></td>
+  
+    </tr>
+    <tr>
+  <td>Nume</td>
+  <td><input type="text" class="form-control" ng-model="obiect.name"/></td>
+       </tr>
+    <tr>
+  <td colspan="2">
+   <button ng-click="addObiect(obiect)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+    </tr>
+   </table>
+</div>
+<div class="col-md-3  col-md-offset-6">
+        <h2>Editare persoana</h2>
+        <table>
+       <tr>
+        <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="editObiect.id"></td>
+       </tr>
+       <tr>
+         <td>Name</td>
+         <td><input type="text" class="form-control" ng-model="editObiect.name"></td>
+       </tr>
+       <tr>
+         <td colspan="2">
+           <button class="btn btn-info btn-xs"  ng-click="updateObiect()">
+            Update
+           </button>
+         </td>
+       </tr>
+    </div>
+     </table>
+  </div>
+  </div>
+  
+  <br/>
+  <hr/>
+  
+  <!-- Student -->
+  
+  <div class="container" id="student" ng-controller="StudentController">
+    <h1>Student</h1>
+    <h2>Tabel studenti</h2>
+    <table class="table table-bordered">
+      <tr>
+        <th ng-repeat="key in keys">{{ key }}</th>
+        <th style="width:210px;">Options</th>
+      </tr>
+      <tr ng-repeat="objct in obiecte" data-id="{{objct.id}}">
+        <td>{{ objct.id }}</td>
+		<td>{{objct.nume}}</td>
+		<td>{{objct.prenume}}</td>
+		<td>{{objct.varsta}}</td>	
+        <td>
+          <a href="">
+            <span ng-click = "displayModal(objct.id)" class="label label-success" >
+              Open
+              <span class="glyphicon glyphicon-folder-open"></span>
+            </span>
+          </a>
+         <button ng-click="setUpdateObiect(objct)" class="btn btn-info btn-xs">
+              Edit
+              <span class="glyphicon glyphicon-edit"></span>
+          </a>
+  <button ng-click="deleteObiect(objct.id)" class="btn btn-danger btn-xs">
+              Remove
+              <span class="glyphicon glyphicon-remove"></span>
+  </button>
+          </a>
+        </td>
+      </tr>
+    </table>
+ 
+  <modal title="Display person" visible="showModal">
+  <form role="form">
+      <div class="form-group">
+   <label for="id">ID</label>
+        <input class="form-control" id ="id"  type="form-control" ng-model="showObiect.id">
+      </div>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input class="form-control" id = "name" type="form-control" ng-model="showObiect.nume">
+      </div><div class="form-group">
+        <label for="prenume">Prenume</label>
+        <input class="form-control" id = "prenume" type="form-control" ng-model="showObiect.prenume">
+      </div><div class="form-group">
+        <label for="varsta">Varsta</label>
+        <input class="form-control" id = "varsta" type="form-control" ng-model="showObiect.varsta">
+      </div>
+     </form>
+  </modal>
+  
+  <div class="row">
+      <div class="col-md-3">
+ <h2>Adaugare student</h2>
+    <table>
+    <tr>
+  <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="obiect.id"/></td>
+  
+    </tr>
+    <tr>
+  <td>Nume</td>
+  <td><input type="text" class="form-control" ng-model="obiect.nume"/></td>
+       </tr>  <tr>
+  <td>Prenume</td>
+  <td><input type="text" class="form-control" ng-model="obiect.prenume"/></td>
+       </tr>  <tr>
+  <td>Varsta</td>
+  <td><input type="text" class="form-control" ng-model="obiect.varsta"/></td>
+       </tr>
+    <tr>
+  <td colspan="2">
+   <button ng-click="addObiect(obiect)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+    </tr>
+   </table>
+</div>
+<div class="col-md-3  col-md-offset-6">
+        <h2>Editeaza stundent</h2>
+        <table>
+       <tr>
+        <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="editObiect.id"></td>
+       </tr>
+       <tr>
+         <td>Nume</td>
+         <td><input type="text" class="form-control" ng-model="editObiect.nume"></td>
+       </tr><tr>
+         <td>Prenume</td>
+         <td><input type="text" class="form-control" ng-model="editObiect.prenume"></td>
+       </tr><tr>
+         <td>Name</td>
+         <td><input type="text" class="form-control" ng-model="editObiect.varsta"></td>
+       </tr>
+       <tr>
+         <td colspan="2">
+           <button class="btn btn-info btn-xs"  ng-click="updateObiect()">
+            Update
+           </button>
+         </td>
+       </tr>
+    </div>
+     </table>
+  </div>
+  </div>
+  <hr/>
+    
+	
+	<!-- Materie -->
+  
+  <div class="container" id="materie" ng-controller="MaterieController">
+    <h1>Materie</h1>
+    <h2>Tabel materii</h2>
+    <table class="table table-bordered">
+      <tr>
+        <th ng-repeat="key in keys">{{ key }}</th>
+        <th style="width:210px;">Options</th>
+      </tr>
+      <tr ng-repeat="objct in obiecte" data-id="{{objct.id}}">
+        <td>{{ objct.id }}</td>
+		<td>{{objct.nume}}</td>
+		<td>{{objct.nickName}}</td>
+		
+        <td>
+          <a href="">
+            <span ng-click = "displayModal(objct.id)" class="label label-success" >
+              Open
+              <span class="glyphicon glyphicon-folder-open"></span>
+            </span>
+          </a>
+         <button ng-click="setUpdateObiect(objct)" class="btn btn-info btn-xs">
+              Edit
+              <span class="glyphicon glyphicon-edit"></span>
+          </a>
+  <button ng-click="deleteObiect(objct.id)" class="btn btn-danger btn-xs">
+              Remove
+              <span class="glyphicon glyphicon-remove"></span>
+  </button>
+          </a>
+        </td>
+      </tr>
+    </table>
+ 
+  <modal title="Display person" visible="showModal">
+  <form role="form">
+      <div class="form-group">
+   <label for="id">ID</label>
+        <input class="form-control" id ="id"  type="form-control" ng-model="showObiect.id">
+      </div>
+      <div class="form-group">
+        <label for="name">Nume</label>
+        <input class="form-control" id = "name" type="form-control" ng-model="showObiect.nume">
+      </div><div class="form-group">
+        <label for="prenume">Prescurtare</label>
+        <input class="form-control" id = "prenume" type="form-control" ng-model="showObiect.nickName">
+      </div>
+     </form>
+  </modal>
+  
+  <div class="row">
+      <div class="col-md-3">
+ <h2>Adaugare materie</h2>
+    <table>
+    <tr>
+  <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="obiect.id"/></td>
+  
+    </tr>
+    <tr>
+  <td>Nume</td>
+  <td><input type="text" class="form-control" ng-model="obiect.nume"/></td>
+       </tr>  <tr>
+  <td>Prescurtare</td>
+  <td><input type="text" class="form-control" ng-model="obiect.nickName"/></td>
+       </tr>  
+    <tr>
+  <td colspan="2">
+   <button ng-click="addObiect(obiect)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+    </tr>
+   </table>
+</div>
+<div class="col-md-3  col-md-offset-6">
+        <h2>Editeaza materie</h2>
+        <table>
+       <tr>
+        <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="editObiect.id"></td>
+       </tr>
+       <tr>
+         <td>Nume</td>
+         <td><input type="text" class="form-control" ng-model="editObiect.nume"></td>
+       </tr><tr>
+         <td>Prenume</td>
+         <td><input type="text" class="form-control" ng-model="editObiect.nickName"></td>
+       </tr>
+       <tr>
+         <td colspan="2">
+           <button class="btn btn-info btn-xs"  ng-click="updateObiect()">
+            Update
+           </button>
+         </td>
+       </tr>
+    </div>
+     </table>
+  </div>
+  </div>
+  <hr/>
+    
+  	<!-- Facultate -->
+  
+  <div class="container" id="facultate" ng-controller="FacultateController">
+    <h1>Facultate</h1>
+    <h2>Tabel facultati</h2>
+    <table class="table table-bordered">
+      <tr>
+        <th ng-repeat="key in keys">{{ key }}</th>
+        <th style="width:210px;">Options</th>
+      </tr>
+      <tr ng-repeat="objct in obiecte" data-id="{{objct.id}}">
+        <td>{{ objct.id }}</td>
+		<td>{{objct.nume}}</td>
+		<td>{{objct.shortName}}</td>
+		<td>{{objct.numarStudenti}}</td>
+		
+        <td>
+          <a href="">
+            <span ng-click = "displayModal(objct.id)" class="label label-success" >
+              Open
+              <span class="glyphicon glyphicon-folder-open"></span>
+            </span>
+          </a>
+         <button ng-click="setUpdateObiect(objct)" class="btn btn-info btn-xs">
+              Edit
+              <span class="glyphicon glyphicon-edit"></span>
+          </a>
+  <button ng-click="deleteObiect(objct.id)" class="btn btn-danger btn-xs">
+              Remove
+              <span class="glyphicon glyphicon-remove"></span>
+  </button>
+          </a>
+        </td>
+      </tr>
+    </table>
+ 
+  <modal title="Display person" visible="showModal">
+  <form role="form">
+      <div class="form-group">
+   <label for="id">ID</label>
+        <input class="form-control" id ="id"  type="form-control" ng-model="showObiect.id">
+      </div>
+      <div class="form-group">
+        <label for="name">Nume</label>
+        <input class="form-control" id = "name" type="form-control" ng-model="showObiect.nume">
+      </div><div class="form-group">
+        <label for="prenume">Prescurtare</label>
+        <input class="form-control" id = "prenume" type="form-control" ng-model="showObiect.shortName">
+      </div><div class="form-group">
+        <label for="prenume">Numar de studenti</label>
+        <input class="form-control" id = "prenume" type="form-control" ng-model="showObiect.numarStudenti">
+      </div>
+     </form>
+  </modal>
+  
+  <div class="row">
+      <div class="col-md-3">
+ <h2>Adaugare facultate</h2>
+    <table>
+    <tr>
+  <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="obiect.id"/></td>
+  
+    </tr>
+    <tr>
+  <td>Nume</td>
+  <td><input type="text" class="form-control" ng-model="obiect.nume"/></td>
+       </tr>  <tr>
+  <td>Prescurtare</td>
+  <td><input type="text" class="form-control" ng-model="obiect.shortName"/></td>
+       </tr>  <tr>
+  <td>Numar Studenti</td>
+  <td><input type="text" class="form-control" ng-model="obiect.numarStudenti"/></td>
+       </tr>  
+    <tr>
+  <td colspan="2">
+   <button ng-click="addObiect(obiect)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+    </tr>
+   </table>
+</div>
+<div class="col-md-3  col-md-offset-6">
+        <h2>Editeaza facultate</h2>
+        <table>
+       <tr>
+        <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="editObiect.id"></td>
+       </tr>
+       <tr>
+         <td>Nume</td>
+         <td><input type="text" class="form-control" ng-model="editObiect.nume"></td>
+       </tr><tr>
+         <td>Prescurtare</td>
+         <td><input type="text" class="form-control" ng-model="editObiect.shortName"></td>
+       </tr><tr>
+         <td>Numar de studenti</td>
+         <td><input type="text" class="form-control" ng-model="editObiect.numarStudenti"></td>
+       </tr>
+       <tr>
+         <td colspan="2">
+           <button class="btn btn-info btn-xs"  ng-click="updateObiect()">
+            Update
+           </button>
+         </td>
+       </tr>
+    </div>
+     </table>
+  </div>
+  </div>
+  <hr/> 
+    
+    
+    
+    <!-- Profesor -->
+  
+  <div class="container" id="profesor" ng-controller="ProfesorController">
+    <h1>Profesor</h1>
+    <h2>Tabel profesori</h2>
+    <table class="table table-bordered">
+      <tr>
+        <th ng-repeat="key in keys">{{ key }}</th>
+        <th style="width:210px;">Options</th>
+      </tr>
+      <tr ng-repeat="objct in obiecte" data-id="{{objct.id}}">
+        <td>{{objct.id}}</td>
+		<td>{{objct.nume}}</td>
+		<td>{{objct.prenume}}</td>
+		<td>{{objct.titlu}}</td>
+		
+        <td>
+          <a href="">
+            <span ng-click = "displayModal(objct.id)" class="label label-success" >
+              Open
+              <span class="glyphicon glyphicon-folder-open"></span>
+            </span>
+          </a>
+         <button ng-click="setUpdateObiect(objct)" class="btn btn-info btn-xs">
+              Edit
+              <span class="glyphicon glyphicon-edit"></span>
+          </a>
+  <button ng-click="deleteObiect(objct.id)" class="btn btn-danger btn-xs">
+              Remove
+              <span class="glyphicon glyphicon-remove"></span>
+  </button>
+          </a>
+        </td>
+      </tr>
+    </table>
+ 
+  <modal title="Display person" visible="showModal">
+  <form role="form">
+      <div class="form-group">
+   <label for="id">ID</label>
+        <input class="form-control" id ="id"  type="form-control" ng-model="showObiect.id">
+      </div>
+      <div class="form-group">
+        <label for="name">Nume</label>
+        <input class="form-control" id = "name" type="form-control" ng-model="showObiect.nume">
+      </div><div class="form-group">
+        <label for="prenume">Prenume</label>
+        <input class="form-control" id = "prenume" type="form-control" ng-model="showObiect.prenume">
+      </div><div class="form-group">
+        <label for="titlu">Titlu</label>
+        <input class="form-control" id = "titlu" type="form-control" ng-model="showObiect.titlu">
+      </div>
+     </form>
+  </modal>
+  
+  <div class="row">
+      <div class="col-md-3">
+ <h2>Adaugare profesor</h2>
+    <table>
+    <tr>
+  <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="obiect.id"/></td>
+  
+    </tr>
+    <tr>
+  <td>Nume</td>
+  <td><input type="text" class="form-control" ng-model="obiect.nume"/></td>
+       </tr>  <tr>
+  <td>Prenume</td>
+  <td><input type="text" class="form-control" ng-model="obiect.prenume"/></td>
+       </tr>  <tr>
+  <td>Titlu</td>
+  <td><input type="text" class="form-control" ng-model="obiect.titlu"/></td>
+       </tr>  
+    <tr>
+  <td colspan="2">
+   <button ng-click="addObiect(obiect)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+    </tr>
+   </table>
+</div>
+<div class="col-md-3  col-md-offset-6">
+        <h2>Editeaza profesor</h2>
+        <table>
+       <tr>
+        <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="editObiect.id"></td>
+       </tr>
+       <tr>
+         <td>Nume</td>
+         <td><input type="text" class="form-control" ng-model="editObiect.nume"></td>
+       </tr><tr>
+         <td>Prenume</td>
+         <td><input type="text" class="form-control" ng-model="editObiect.prenume"></td>
+       </tr><tr>
+         <td>Titlu</td>
+         <td><input type="text" class="form-control" ng-model="editObiect.titlu"></td>
+       </tr>
+       <tr>
+         <td colspan="2">
+           <button class="btn btn-info btn-xs"  ng-click="updateObiect()">
+            Update
+           </button>
+         </td>
+       </tr>
+    </div>
+     </table>
+  </div>
+  </div>
+  <hr/> 
+    
+   
+  <div class="container">
+    <footer class="footer">
+      <p class="text-muted pull-left">AWJ Base Project &copy; 2015-2016</p>
+      <p class="text-muted pull-right">Avram Cristian Ionut, 331 AB</p>
+    </footer>
   </div>
 
   <script src="js/jquery-1.11.3.min.js"></script>
